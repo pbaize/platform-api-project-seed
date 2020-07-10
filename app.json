@@ -1,7 +1,7 @@
 {
     "runtime": {
         "arguments": "--electron-child-windows --inspect --v=1",
-        "version": "99.99.99.99"
+        "version": "canary"
     },
     "shortcut": {
         "company": "OpenFin",
