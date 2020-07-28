@@ -1,7 +1,7 @@
 {
     "runtime": {
-        "arguments": "--v=1 --inspect",
-        "version": "beta"
+        "arguments": "--electron-child-windows --inspect --v=1",
+        "version": "canary"
     },
     "shortcut": {
         "company": "OpenFin",
@@ -16,7 +16,7 @@
         "providerUrl": "http://localhost:5555/provider.html",
         "permissions": {
             "ExternalWindow": {
-              	"wrap": true
+                "wrap": true
             },
             "System": {
                 "getAllExternalWindows": true,
@@ -40,7 +40,35 @@
         },
         "defaultViewOptions": {
             "experimental": {
-                "childWindows": true
+                "contentCreation": {
+                    "rules": [
+                        {
+                            "behavior": "window",
+                            "match": [
+                                "*://*.youtube.com/*"
+                            ],
+                            "options": {
+                                "frame": false,
+                                "processAffinity": "rick",
+                                "alwaysOnTop": true,
+                                "defaultWidth": 800,
+                                "defaultHeight": 600
+                            }
+                        },
+                        {
+                            "behavior": "window",
+                            "match": [
+                                "*://*.google.com/*"
+                            ]
+                        },
+                        {
+                            "behavior": "view",
+                            "match": [
+                                "<all_urls>"
+                            ]
+                        }
+                    ]
+                }
             }
         },
         "commands": [
@@ -63,7 +91,7 @@
                                     "componentName": "view",
                                     "componentState": {
                                         "processAffinity": "ps_1",
-                                        "url": "https://cdn.openfin.co/embed-web/chart.html"
+                                        "url": "http://localhost:5555/test.html"
                                     }
                                 }
                             ]
