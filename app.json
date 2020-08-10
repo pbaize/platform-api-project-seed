@@ -1,7 +1,7 @@
 {
     "runtime": {
         "arguments": "--electron-child-windows --inspect --v=1",
-        "version": "canary"
+        "version": "16.83.53.17"
     },
     "shortcut": {
         "company": "OpenFin",
@@ -54,6 +54,18 @@
                                 "defaultWidth": 800,
                                 "defaultHeight": 600
                             }
+                        },
+                        {
+                            "behavior": "browser",
+                            "match": [
+                                "*://*.bing.com/*"
+                            ]
+                        },
+                        {
+                            "behavior": "block",
+                            "match": [
+                                "*://*.ebay.com/*"
+                            ]
                         },
                         {
                             "behavior": "window",
