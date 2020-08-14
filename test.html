@@ -1,15 +1,47 @@
 <html>
 
+<head>
+    <title>My Favorite Links</title>
+</head>
+
 <body>
     <ul>
-        <li><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">Outlook</a> (Opens in frameless
-            window)</li>
         <li><a href="" target="_blank">me</a> (opens as view)</li>
-        <li><a href="https://google.com" target="_blank">google</a> (opens in framed window)</li>
-        <li><a href="https://bing.com" target="_blank">bing</a> (opens in browser)</li>
-        <li><a href="https://ebay.com" target="_blank">ebay</a> (blocked)</li>
-
+        <li><a href="child.html" target="_blank">child</a> (opens as view)</li>
+        <li><a href="child.html?window=true" target="_blank">child</a> (opens in framed window)</li>
+        <li><a href="https://reddit.com" target="_blank">Reddit</a> (blocked)</li>
+        <li><a href="https://reddit.com/r/javascript" target="_blank">r/javascript</a> (view)</li>
+        <li><a href="https://gitlab.com/openfin/core" target="_blank">GitLab</a> (opens in browser)</li>
+        <li><a href="https://stackoverflow.com/questions/1732348/regex-match-open-tags-except-xhtml-self-contained-tags"
+                target="_blank">Stack OverFlow</a> (Opens in frameless
+            window)</li>
     </ul>
+    <p>
+        <span id="blocked">0</span> window creations blocked
+    </p>
+    <p>
+        <span id="child">0</span> postMessage from child window
+    </p>
 </body>
+<script>
+    let blockedCount = 0;
+    let messageCount = 0;
+    document.getElementById('blocked')
+    function update() {
+        document.getElementById('blocked').innerHTML = blockedCount
+        document.getElementById('child').innerHTML = messageCount
+    }
+    update()
+    window.onmessage = () => {
+        messageCount += 1;
+        update();
+    }
+    if (fin) {
+        fin.me.on('child-content-blocked', () => {
+            blockedCount += 1;
+            update();
+        })
+    }
+</script>
 
 </html>

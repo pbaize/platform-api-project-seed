@@ -1,7 +1,7 @@
 {
     "runtime": {
-        "arguments": "--electron-child-windows --inspect --v=1",
-        "version": "16.83.53.17"
+        "arguments": "--inspect --v=1",
+        "version": "alpha"
     },
     "shortcut": {
         "company": "OpenFin",
@@ -45,11 +45,10 @@
                         {
                             "behavior": "window",
                             "match": [
-                                "*://*.youtube.com/*"
+                                "*://*.stackoverflow.com/*"
                             ],
                             "options": {
                                 "frame": false,
-                                "processAffinity": "rick",
                                 "alwaysOnTop": true,
                                 "defaultWidth": 800,
                                 "defaultHeight": 600
@@ -58,19 +57,28 @@
                         {
                             "behavior": "browser",
                             "match": [
-                                "*://*.bing.com/*"
+                                "*://*.gitlab.com/*"
                             ]
+                        },
+                        {
+                            "behavior": "view",
+                            "match": [
+                                "*://*.reddit.com/r/javascript"
+                            ],
+                            "options": {
+                                "title": "...loading"
+                            }
                         },
                         {
                             "behavior": "block",
                             "match": [
-                                "*://*.ebay.com/*"
+                                "*://*.reddit.com/*"
                             ]
                         },
                         {
                             "behavior": "window",
                             "match": [
-                                "*://*.google.com/*"
+                                "*://*/*?window=true"
                             ]
                         },
                         {
