@@ -1,7 +1,7 @@
 {
     "runtime": {
         "arguments": "--v=1 --inspect",
-        "version": "beta"
+        "version": "canary"
     },
     "shortcut": {
         "company": "OpenFin",
@@ -36,11 +36,17 @@
             "showBackgroundImages": true,
             "backgroundThrottling": true,
             "minHeight": 445,
-            "minWidth": 354
+            "minWidth": 354,
+                        "fdc3": {
+                            "channel": "default"
+                        }
         },
         "defaultViewOptions": {
             "experimental": {
                 "childWindows": true
+            },
+            "fdc3": {
+                "channel": "default"
             }
         },
         "commands": [
@@ -63,16 +69,7 @@
                                     "componentName": "view",
                                     "componentState": {
                                         "processAffinity": "ps_1",
-                                        "url": "http://localhost:5555/intents.html",
-                                        "intentDeclaration": {
-                                            "ViewChart": [
-                                                "fdc3.instrument"
-                                            ]
-                                        },
-                                        "contextDeclaration": [
-                                            "fdc3.instrument", 
-                                            "fdc3.country"
-                                        ]
+                                        "url": "http://localhost:5555/intents1.html"
                                     }
                                 },
                                 {
@@ -80,7 +77,10 @@
                                     "componentName": "view",
                                     "componentState": {
                                         "processAffinity": "ps_1",
-                                        "url": "https://cdn.openfin.co/embed-web/chart.html"
+                                        "url": "http://localhost:5555/intents2.html",
+                                        "fdc3": {
+                                            "channel": "blue"
+                                        }
                                     }
                                 }
                             ]

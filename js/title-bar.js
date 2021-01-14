@@ -1,4 +1,5 @@
 import { html, render } from 'https://unpkg.com/lit-html@1.0.0/lit-html.js';
+import { CONTAINER_ID } from "./CONTAINER_ID.js";
 
 //Our Title bar element
 class TitleBar extends HTMLElement {
@@ -23,27 +24,22 @@ class TitleBar extends HTMLElement {
             }
         });
         
-        fin.Platform.getCurrentSync().on('platform-snapshot-applied', async (evt) => {
-            function sleep(ms) {
-                return new Promise(resolve => setTimeout(resolve, ms));
-            }
-            await sleep(2000);
-
-            colorChannelAPI.getColorSnapshot()
-                .then((colorChannelInfo) => {
-                    console.log('colorChannelInfo', colorChannelInfo)
-                    const { colorMap, colorContextMap } = colorChannelInfo;
-                    const colorMapIterable = Object.entries(colorMap);
-                    for (const [name, color] of colorMapIterable) {
-                        console.log('name', name)
-                        console.log('color', color)
-                        const tab = document.getElementById(`tab-${name}`)
-                        if (tab) {
-                            tab.classList.add(`${color}-channel`);
-                        }
-                    }
-                })
-        });
+        // fin.Platform.getCurrentSync().on('platform-snapshot-applied', async (evt) => {
+        //     colorChannelAPI.getColorSnapshot()
+        //         .then((colorChannelInfo) => {
+        //             console.log('colorChannelInfo', colorChannelInfo)
+        //             const { colorMap, colorContextMap } = colorChannelInfo;
+        //             const colorMapIterable = Object.entries(colorMap);
+        //             for (const [name, color] of colorMapIterable) {
+        //                 console.log('name', name)
+        //                 console.log('color', color)
+        //                 const tab = document.getElementById(`tab-${name}`)
+        //                 if (tab) {
+        //                     tab.classList.add(`${color}-channel`);
+        //                 }
+        //             }
+        //         })
+        // });
 
         fin.me.on('layout-ready', async () => {
             // Whenever a new layout is ready on this window (on init, replace, or applyPreset)
@@ -62,16 +58,18 @@ class TitleBar extends HTMLElement {
             this.lastFocusedView = viewEvent.viewIdentity;
         })
 
-        fin.Application.getCurrentSync().addListener('view-created', async (viewEvent) => {
-            console.log('viewEvent', viewEvent)
-            // const view = fin.View.wrapSync(viewEvent);
-            // const options = await view.getOptions()
-            // if (options.customData && options.customData.colorChannelDeclaration) {
-            //     window.colorChannelAPI.changeColorChannel(viewEvent, color);
-            //     document.getElementById(`tab-${this.lastFocusedView.name}`).classList.remove('red-channel', 'blue-channel', 'green-channel');
-            //     document.getElementById(`tab-${this.lastFocusedView.name}`).classList.add(`${color}-channel`);
-            // }
+        document.getElementById(CONTAINER_ID).addEventListener('tab-created', async e => {
+            const payload = e.detail
+            console.log('viewEvent', payload)
+            const view = fin.View.wrapSync(payload);
+            const options = await view.getOptions()
+            if (options.fdc3 && options.fdc3.channel) {
+                console.log('getViewOptions', options)
+                document.getElementById(payload.tabSelector).classList.remove('red-channel', 'blue-channel', 'green-channel');
+                document.getElementById(payload.tabSelector).classList.add(`${options.fdc3.channel}-channel`);
+            }
         })
+
     }
 
     render = async () => {
@@ -97,10 +95,10 @@ class TitleBar extends HTMLElement {
         console.log('evt', evt);
         console.log('this.lastFocusedView', this.lastFocusedView);
         const color = evt.target.title;
-        window.colorChannelAPI.changeColorChannel(this.lastFocusedView, color);
+        window.fdc3.joinChannel(color, this.lastFocusedView);
         document.getElementById(`tab-${this.lastFocusedView.name}`).classList.remove('red-channel', 'blue-channel', 'green-channel');
         document.getElementById(`tab-${this.lastFocusedView.name}`).classList.add(`${color}-channel`);
-        fin.View.wrapSync(this.lastFocusedView).updateOptions({ customData: { colorChannelDeclaration: color}})
+        fin.View.wrapSync(this.lastFocusedView).updateOptions({ fdc3: { channel: color}})
     }
 
     maxOrRestore = async () => {

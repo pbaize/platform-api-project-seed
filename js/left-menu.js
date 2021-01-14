@@ -1,6 +1,6 @@
 import { html, render } from 'https://unpkg.com/lit-html@1.0.0/lit-html.js';
 import { getTemplates, getTemplateByName, onStoreUpdate } from './template-store.js';
-import { CONTAINER_ID } from './platform-window.js';
+import { CONTAINER_ID } from "./CONTAINER_ID.js";
 
 const CHART_URL = 'https://cdn.openfin.co/embed-web/chart.html';
 const LAYOUT_STORE_KEY  = 'LayoutForm';
@@ -36,18 +36,14 @@ class LeftMenu extends HTMLElement {
                 processAffinity: 'cv_1'
             },
             {
-                url: window.location.href.replace('platform-window', 'intents'),
-                printName: 'Intents',
+                url: window.location.href.replace('platform-window', 'intents1'),
+                printName: 'Interop (1 listener)',
                 processAffinity: 'cv_1',
-                intentDeclaration: {
-                    ViewChart: [
-                        "fdc3.instrument"
-                    ]
-                },
-                contextDeclaration: [
-                    "fdc3.instrument",
-                    "fdc3.country"
-                ]
+            },
+            {
+                url: window.location.href.replace('platform-window', 'intents2'),
+                printName: 'Interop (2 Listeners)',
+                processAffinity: 'cv_1',
             },
             {
                 url: `https://cdn.openfin.co/docs/javascript/${fin.desktop.getVersion()}`,
@@ -168,6 +164,7 @@ class LeftMenu extends HTMLElement {
         const bounds = await fin.me.getBounds();
         const layout = await fin.Platform.Layout.getCurrentSync().getConfig();
         const customContext = await fin.Platform.getCurrentSync().getWindowContext();
+        console.log(layout)
         const snapshot = {
             windows: [
                 {
