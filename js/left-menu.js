@@ -16,26 +16,6 @@ class LeftMenu extends HTMLElement {
         //List of apps available in the menu.
         this.appList = [
             {
-                url: CHART_URL,
-                printName: 'OF Chart',
-                processAffinity: 'ps_1'
-            },
-            {
-                url: 'https://www.tradingview.com/chart/?symbol=NASDAQ:AAPL',
-                printName: 'TradeView',
-                processAffinity: 'tv_1'
-            },
-            {
-                url: 'https://www.google.com/search?q=INDEXDJX:+.DJI&stick=H4sIAAAAAAAAAONgecRozC3w8sc9YSmtSWtOXmNU4eIKzsgvd80rySypFBLjYoOyeKS4uDj0c_UNkgsry3kWsfJ5-rm4Rrh4RVgp6Ll4eQIAqJT5uUkAAAA&source=lnms&sa=X&ved=0ahUKEwii_NWT9fzoAhU3mHIEHWy3AWIQ_AUIDSgA&biw=1280&bih=1366&dpr=1',
-                printName: 'News',
-                processAffinity: 'mw_1'
-            },
-            {
-                url: window.location.href.replace('platform-window', 'color-view'),
-                printName: 'Colors',
-                processAffinity: 'cv_1'
-            },
-            {
                 url: window.location.href.replace('platform-window', 'intents1'),
                 printName: 'Interop (1 listener)',
                 processAffinity: 'cv_1',
@@ -46,9 +26,13 @@ class LeftMenu extends HTMLElement {
                 processAffinity: 'cv_1',
             },
             {
-                url: `https://cdn.openfin.co/docs/javascript/${fin.desktop.getVersion()}`,
-                printName: "Documentation",
+                url: `https://appd.kolbito.com/demos/tradingview-chart/`,
+                printName: "TradingView Chart",
                 processAffinity: 'ps_1'
+            },
+            {
+                url: 'https://appd.kolbito.com/demos/ticker-grid/',
+                printName: 'Ticker Grid'
             }
         ];
 
