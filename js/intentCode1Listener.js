@@ -20,6 +20,7 @@ window.addEventListener('DOMContentLoaded', async () => {
                 break;
 
             default:
+                console.log('non-supported context: ', type)
                 break;
         }
     }
